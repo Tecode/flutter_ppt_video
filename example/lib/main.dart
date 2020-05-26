@@ -37,6 +37,7 @@ class _MyAppState extends State<MyApp> {
     });
     _videoController.setLooping(true);
     _videoController.initialize().then((_) => setState(() {}));
+    _videoController.play();
   }
 
   @override
@@ -50,13 +51,9 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        body: Column(
-          children: <Widget>[
-            PPtVideoPlayer(
-              videoController: _videoController,
-            ),
-            FlatButton(onPressed: () => _videoController.play(), child: Text('播放'))
-          ],
+        body: PPtVideoPlayer(
+          videoController: _videoController,
+          sliderList: _pptList,
         ),
       ),
     );

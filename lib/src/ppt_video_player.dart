@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
+import 'full_player.dart';
+
 class PPtVideoPlayer extends StatefulWidget {
   final VideoPlayerController videoController;
   final Duration startAt;
+  final List<String> sliderList;
 
   PPtVideoPlayer({
     @required this.videoController,
     this.startAt = const Duration(seconds: 0),
+    this.sliderList = const [],
   }) : assert(videoController != null);
 
   @override
@@ -19,6 +23,8 @@ class _PPtVideoPlayerState extends State<PPtVideoPlayer> {
   PageController _pageController = PageController(initialPage: 0);
 
   VideoPlayerController get controller => widget.videoController;
+
+  List<String> get sliderList => widget.sliderList;
 
   void _listenVideoControllerWrapper() {
     controller.addListener(() {
@@ -60,14 +66,38 @@ class _PPtVideoPlayerState extends State<PPtVideoPlayer> {
   Widget get _buildSlider {
     return Container(
       color: Colors.deepOrange,
-//      child: PageView.builder(
-//        controller: _pageController,
-//        physics: ClampingScrollPhysics(),
-//        itemBuilder: (BuildContext context, int index) =>
-//            Image.asset('picture/ppt/幻灯片${index + 1}.png'),
-//        itemCount: 24,
-//      ),
+      child: PageView.builder(
+        controller: _pageController,
+        physics: ClampingScrollPhysics(),
+        itemBuilder: (BuildContext context, int index) =>
+            FadeInImage.assetNetwork(
+          placeholder: 'assets/loading.gif',
+          image: sliderList[index],
+        ),
+        itemCount: sliderList.length,
+      ),
     );
+  }
+
+  void pushFullScreenWidget() {
+    final TransitionRoute<void> route = PageRouteBuilder<void>(
+      settings: RouteSettings(name: '全屏播放'),
+      pageBuilder: (BuildContext context, Animation<double> animation,
+              Animation<double> secondaryAnimation) =>
+          FullscreenPlayer(controller: controller,),
+    );
+
+    route.completed.then((void value) {
+//      controller.setVolume(0.0);
+    });
+
+//    controller.setVolume(1.0);
+    Navigator.of(context).push(route).then((_) {
+      if (mounted)
+        setState(() {
+          _listenVideoControllerWrapper();
+        });
+    });
   }
 
   @override
@@ -91,6 +121,15 @@ class _PPtVideoPlayerState extends State<PPtVideoPlayer> {
                 child: _toggle ? _buildPlayer : _buildSlider,
               ),
             ),
+            Positioned(
+              bottom: 0,
+              left: 0,
+              right: 0,
+              child: FlatButton(
+                child: Text('全屏'),
+                onPressed: () => pushFullScreenWidget(),
+              ),
+            )
           ],
         ),
       ),
