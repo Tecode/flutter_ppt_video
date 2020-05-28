@@ -34,6 +34,8 @@ class _FullscreenPlayerState extends State<FullscreenPlayer> {
   bool bottomNavBarVisible = true;
   Timer _timer;
   bool running = true;
+  double topOffset = 10.0;
+  double leftOffset = 10.0;
 
   PageController _pageController;
 
@@ -126,21 +128,44 @@ class _FullscreenPlayerState extends State<FullscreenPlayer> {
                   : Center(
                       child: PPTVideoPlayer(videoController),
                     ),
-              Positioned(
+              AnimatedPositioned(
                 width: 160.0,
                 height: 90.0,
-                top: 10.0,
-                right: 10.0,
+                top: topOffset,
+                left: leftOffset,
+                duration: Duration(milliseconds: 200),
                 child: GestureDetector(
                   onTap: () => setState(() {
                     _toggle = !_toggle;
                   }),
-                  child: _toggle
-                      ? PPTVideoPlayer(videoController)
-                      : SliderComponent(
-                          _pageController,
-                          sliderList: widget.sliderList,
-                        ),
+                  child: Draggable(
+                    child: _toggle
+                        ? PPTVideoPlayer(videoController)
+                        : SliderComponent(
+                            _pageController,
+                            sliderList: widget.sliderList,
+                          ),
+                    feedback: Container(
+                      color: Colors.blue,
+                      width: 160.0,
+                      height: 90.0,
+                      child: _toggle
+                          ? PPTVideoPlayer(videoController)
+                          : SliderComponent(
+                              _pageController,
+                              sliderList: widget.sliderList,
+                            ),
+                    ),
+                    onDragEnd: (dragEndDetails) {
+                      setState(() {
+                        topOffset = dragEndDetails.offset.dy;
+                        leftOffset = dragEndDetails.offset.dx;
+                      });
+                      print("onDragEnd");
+                      print(" dragEndDetails.offset:" +
+                          dragEndDetails.offset.toString());
+                    },
+                  ),
                 ),
               ),
               AnimatedPositioned(
