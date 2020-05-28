@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="22a9ded0-0bdd-4ce4-9ce3-1fd725f0ad30" name="Default Changelist" comment="">
+    <list default="$ENABLE_FLUTTER_DESKTOP$" id="22a9ded0-0bdd-4ce4-9ce3-1fd725f0ad30" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/example/pubspec.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/src/controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/controller.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/full_player.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/full_player.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="$ENABLE_FLUTTER_DESKTOP$" />
     <option name="SHOW_DIALOG" value="false" />
-    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_CONFLICTS" value="$ENABLE_FLUTTER_DESKTOP$" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="5a16c8b7" />
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -23,11 +27,11 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1cQNb8PvJOypKRn5iboAfett7c4" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="$ENABLE_FLUTTER_DESKTOP$" />
   <component name="PropertiesComponent">
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="$ENABLE_FLUTTER_DESKTOP$" />
     <property name="dart.analysis.tool.window.force.activate" value="false" />
-    <property name="io.flutter.reload.alreadyRun" value="true" />
+    <property name="io.flutter.reload.alreadyRun" value="$ENABLE_FLUTTER_DESKTOP$" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
@@ -52,7 +56,7 @@
     <configuration />
   </component>
   <component name="TaskManager">
-    <task active="true" id="Default" summary="Default task">
+    <task active="$ENABLE_FLUTTER_DESKTOP$" id="Default" summary="Default task">
       <changelist id="22a9ded0-0bdd-4ce4-9ce3-1fd725f0ad30" name="Default Changelist" comment="" />
       <created>1590456925481</created>
       <option name="number" value="Default" />

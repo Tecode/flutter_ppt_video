@@ -4,7 +4,11 @@ import 'package:video_player/video_player.dart';
 
 class ControllerBar extends StatefulWidget {
   final VideoPlayerController controller;
-  ControllerBar(this.controller);
+  final bool showProgressBar;
+  ControllerBar(
+    this.controller, {
+    this.showProgressBar = false,
+  });
 
   @override
   _ControllerBarState createState() => _ControllerBarState();
@@ -46,19 +50,10 @@ class _ControllerBarState extends State<ControllerBar> {
     });
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [Colors.transparent, Colors.black.withOpacity(0.4)],
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-        ),
-      ),
-      padding: EdgeInsets.symmetric(horizontal: 15.0),
-      height: 34.0,
-      child: Row(
+  Widget get _progressBar {
+    // 有进度条
+    if (widget.showProgressBar) {
+      return Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           Row(children: <Widget>[
@@ -151,7 +146,48 @@ class _ControllerBarState extends State<ControllerBar> {
             ),
           ]),
         ],
+      );
+    }
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        GestureDetector(
+          behavior: HitTestBehavior.opaque,
+          onTap: () => Navigator.of(context).pop(),
+          child: SizedBox(
+            height: 34.0,
+            child: Row(
+              children: <Widget>[
+                SizedBox(width: 10.0),
+                Image.asset(
+                  'packages/flutter_video/assets/ic_questions_news_quanpinxuexi.png',
+                  width: 18.0,
+                  height: 18.0,
+                ),
+                SizedBox(width: 5.0),
+                Text('退出全屏',
+                    style: TextStyle(fontSize: 12.0, color: Colors.white))
+              ],
+            ),
+          ),
+        )
+      ],
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [Colors.transparent, Colors.black.withOpacity(0.4)],
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+        ),
       ),
+      padding: EdgeInsets.symmetric(horizontal: 15.0),
+      height: 34.0,
+      child: _progressBar,
     );
   }
 }
