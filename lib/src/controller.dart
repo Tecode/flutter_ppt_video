@@ -95,17 +95,39 @@ class _ControllerBarState extends State<ControllerBar> {
                 ),
               ),
             ),
-            SizedBox(
-              height: 34.0,
-              width: 40.0,
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 10.0),
-                child: Image.asset(
-                  'packages/flutter_video/assets/ic_questions_news_beisutiaozheng.png',
-                  width: 20.0,
-                  height: 18.0,
+            Stack(
+              overflow: Overflow.visible,
+              children: <Widget>[
+                SizedBox(
+                  height: 34.0,
+                  width: 40.0,
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 10.0),
+                    child: Image.asset(
+                      'packages/flutter_video/assets/ic_questions_news_beisutiaozheng.png',
+                      width: 20.0,
+                      height: 18.0,
+                    ),
+                  ),
                 ),
-              ),
+                Positioned(
+                  top: -10.0,
+                  left: 15.0,
+                  child: Container(
+                    child: Center(
+                        child: Text(
+                      'x1.6',
+                      style: TextStyle(fontSize: 12.0, color: Colors.white),
+                    )),
+                    width: 34.0,
+                    height: 18.0,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20.0),
+                      color: Color(0xffED6831),
+                    ),
+                  ),
+                ),
+              ],
             ),
             GestureDetector(
               behavior: HitTestBehavior.opaque,

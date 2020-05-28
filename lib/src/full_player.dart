@@ -156,20 +156,15 @@ class _FullscreenPlayerState extends State<FullscreenPlayer> {
                               sliderList: widget.sliderList,
                             ),
                     ),
-                    onDragEnd: (dragEndDetails) {
-                      setState(() {
-                        topOffset = dragEndDetails.offset.dy;
-                        leftOffset = dragEndDetails.offset.dx;
-                      });
-                      print("onDragEnd");
-                      print(" dragEndDetails.offset:" +
-                          dragEndDetails.offset.toString());
-                    },
+                    onDragEnd: (dragEndDetails) => setState(() {
+                      topOffset = dragEndDetails.offset.dy;
+                      leftOffset = dragEndDetails.offset.dx;
+                    }),
                   ),
                 ),
               ),
               AnimatedPositioned(
-                bottom: bottomNavBarVisible ? 0.0 : -40.0,
+                bottom: bottomNavBarVisible ? 0.0 : -60.0,
                 left: 0.0,
                 right: 0.0,
                 child: ControllerBar(videoController),
