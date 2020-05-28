@@ -2,17 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="22a9ded0-0bdd-4ce4-9ce3-1fd725f0ad30" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/lib/src/controller.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/widget/SliderComponent.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/widget/pptVideoPlayer.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/widget/timerText.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/src/calculatePicturePosition.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/ios/Runner.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/Runner.xcodeproj/project.pbxproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/ios/Runner.xcworkspace/contents.xcworkspacedata" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/Runner.xcworkspace/contents.xcworkspacedata" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/example/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_video.iml" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_video.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/flutter_video.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/flutter_video.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/src/full_player.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/full_player.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/src/ppt_video_player.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/ppt_video_player.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/type.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/type.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/widget/SliderComponent.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/widget/sliderComponent.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/widget/pptVideoPlayer.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/widget/pptVideoPlayer.dart" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -20,7 +18,7 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="Pixel_2_API_26" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="5a16c8b7" />
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -68,6 +66,14 @@
       <option name="presentableId" value="Default" />
       <updated>1590456925481</updated>
     </task>
+    <task id="LOCAL-00001" summary="视频全屏控制条">
+      <created>1590637421600</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1590637421600</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -82,5 +88,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="视频全屏控制条" />
+    <option name="LAST_COMMIT_MESSAGE" value="视频全屏控制条" />
   </component>
 </project>

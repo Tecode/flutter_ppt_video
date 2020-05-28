@@ -1,6 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_video/src/type.dart';
 import 'package:video_player/video_player.dart';
 
+import 'calculatePicturePosition.dart';
 import 'full_player.dart';
 import 'widget/SliderComponent.dart';
 import 'widget/pptVideoPlayer.dart';
@@ -8,12 +12,14 @@ import 'widget/pptVideoPlayer.dart';
 class PPtVideoPlayer extends StatefulWidget {
   final VideoPlayerController videoController;
   final Duration startAt;
-  final List<String> sliderList;
+  final List<PPTType> sliderList;
+  final bool controllerVisible;
 
   PPtVideoPlayer({
     @required this.videoController,
     this.startAt = const Duration(seconds: 0),
-    this.sliderList = const [],
+    this.sliderList = const <PPTType>[],
+    this.controllerVisible = true,
   }) : assert(videoController != null);
 
   @override
@@ -22,37 +28,44 @@ class PPtVideoPlayer extends StatefulWidget {
 
 class _PPtVideoPlayerState extends State<PPtVideoPlayer> {
   bool _toggle = false;
-  PageController _pageController = PageController(initialPage: 0);
+  PageController _pageController;
+  bool running = true;
+
+////  监听ppt播放跳转倍速
+  StreamController _streamController = StreamController.broadcast();
 
   VideoPlayerController get controller => widget.videoController;
 
-  List<String> get sliderList => widget.sliderList;
+  List<PPTType> get sliderList => widget.sliderList;
 
   void _listenVideoControllerWrapper() {
     controller.addListener(() {
-//      print(
-//          '${(_pageController.page + 1) * 100}--${controller.value.position.inSeconds}---555');
-//      if (controller.value.position.inSeconds >
-//          (_pageController.page + 1) * 20) {
-//        _pageController.animateTo(_pageController.page + 1,
-//            duration: Duration(milliseconds: 400), curve: Curves.ease);
-//      }
+      if (!running) {
+        return;
+      }
+      running = false;
+      Future.delayed(Duration(milliseconds: 1500), () {
+        running = true;
+      });
+      if (_pageController.hasClients) {
+        _pageController.animateToPage(
+          getListPicture(controller.value.position, sliderList),
+          duration: Duration(milliseconds: 400),
+          curve: Curves.ease,
+        );
+      }
     });
   }
 
   @override
   void initState() {
     super.initState();
+    _streamController.stream.listen((event) {
+      print(event['key']);
+    });
+    _pageController = PageController(initialPage: 0);
     _listenVideoControllerWrapper();
   }
-
-//  @override
-//  void didUpdateWidget(PPtVideoPlayer oldWidget) {
-//    super.didUpdateWidget(oldWidget);
-//    oldWidget.videoController.removeListener(_listener); // <<<<< controller has already been disposed at this point resulting in the exception being thrown
-////    _textureId = widget.controller.textureId;
-//    widget.videoController.addListener(_listener);
-//  }
 
   @override
   void dispose() {
@@ -61,14 +74,15 @@ class _PPtVideoPlayerState extends State<PPtVideoPlayer> {
   }
 
   void pushFullScreenWidget() {
+    _streamController.add({'key': 'FULL', 'value': '全屏'});
     final TransitionRoute<void> route = PageRouteBuilder<void>(
       settings: RouteSettings(name: '全屏播放'),
       pageBuilder: (BuildContext context, Animation<double> animation,
               Animation<double> secondaryAnimation) =>
           FullscreenPlayer(
         controller: controller,
-        pageController: _pageController,
         sliderList: sliderList,
+        streamController: _streamController,
       ),
     );
 
@@ -117,12 +131,16 @@ class _PPtVideoPlayerState extends State<PPtVideoPlayer> {
               ),
             ),
             Positioned(
-              bottom: 0,
+              bottom: -6.0,
               left: 0,
               right: 0,
-              child: FlatButton(
-                child: Text('全屏'),
-                onPressed: () => pushFullScreenWidget(),
+              child: Visibility(
+                visible: widget.controllerVisible,
+                child: FlatButton(
+                  color: Colors.blue,
+                  child: Text('全屏'),
+                  onPressed: () => pushFullScreenWidget(),
+                ),
               ),
             )
           ],

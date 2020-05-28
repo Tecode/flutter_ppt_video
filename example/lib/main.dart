@@ -15,15 +15,37 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   VideoPlayerController _videoController;
 
-  final List<String> _pptList = [
-    'https://image.pearvideo.com/cont/20200508/11905134-153651-1.png',
-    'https://image.pearvideo.com/cont/20200509/cont-1673461-12377763.jpg',
-    'https://image.pearvideo.com/cont/20200521/cont-1675814-12387507.jpg',
-    'https://image.pearvideo.com/cont/20200525/11905134-140255-1.png',
-    'https://image1.pearvideo.com/cont/20200523/11905134-112111-1.png',
-    'https://image.pearvideo.com/cont/20200522/cont-1675703-12388272.jpg',
-    'https://image2.pearvideo.com/cont/20200514/cont-1674383-12381791.jpg',
-    'https://image1.pearvideo.com/cont/20200428/12655266-164922-1.png',
+  final List<PPTType> _pptList = [
+    PPTType(
+      index: 1,
+      startPosition: 0,
+      url:
+          'https://static.naoxuejia.com/327ea19026232967c9e1680b10523e1587b5ed54.jpeg',
+    ),
+    PPTType(
+      index: 2,
+      startPosition: 10,
+      url:
+          'https://static.naoxuejia.com/c59849a0e90204e209be1ebfa7d0679442161891.jpeg',
+    ),
+    PPTType(
+      index: 3,
+      startPosition: 15,
+      url:
+          'https://static.naoxuejia.com/f6554ea40f1798f851848341185b66d493cd8dd9.jpeg',
+    ),
+    PPTType(
+      index: 4,
+      startPosition: 20,
+      url:
+          'https://static.naoxuejia.com/db455af302764acb35e573adc208eb1f9e9f509b.jpeg',
+    ),
+    PPTType(
+      index: 5,
+      startPosition: 25,
+      url:
+          'https://static.naoxuejia.com/3e943402f8b69903160f5077ac362efc7145f788.jpeg',
+    ),
   ];
 
   @override

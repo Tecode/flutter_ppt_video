@@ -5,23 +5,23 @@ import 'package:flutter/services.dart';
 import 'package:flutter_video/src/controller.dart';
 import 'package:video_player/video_player.dart';
 
+import 'calculatePicturePosition.dart';
+import 'type.dart';
 import 'widget/SliderComponent.dart';
 import 'widget/pptVideoPlayer.dart';
 
 class FullscreenPlayer extends StatefulWidget {
   /// 视频控制器
   final VideoPlayerController controller;
+  final StreamController streamController;
 
   /// ppt列表
-  final List<String> sliderList;
-
-  /// pageView控制器
-  final PageController pageController;
+  final List<PPTType> sliderList;
 
   FullscreenPlayer({
     @required this.controller,
-    this.sliderList,
-    this.pageController,
+    this.sliderList = const <PPTType>[],
+    this.streamController,
   }) : assert(controller != null);
 
   @override
@@ -33,10 +33,36 @@ class _FullscreenPlayerState extends State<FullscreenPlayer> {
   VideoPlayerController get videoController => widget.controller;
   bool bottomNavBarVisible = true;
   Timer _timer;
+  bool running = true;
+
+  PageController _pageController;
 
   @override
   void initState() {
     super.initState();
+    _pageController = PageController(
+      initialPage:
+          getListPicture(videoController.value.position, widget.sliderList),
+    );
+    videoController.addListener(() {
+      if (!running) {
+        return;
+      }
+      running = false;
+      Future.delayed(Duration(milliseconds: 2000), () {
+        running = true;
+      });
+//      跳转到对应ppt索引
+      int _index =
+          getListPicture(videoController.value.position, widget.sliderList);
+      if (_pageController.hasClients) {
+        _pageController.animateToPage(
+          _index,
+          duration: Duration(milliseconds: 400),
+          curve: Curves.ease,
+        );
+      }
+    });
 //    隐藏状态栏
     SystemChrome.setEnabledSystemUIOverlays([]);
 //    屏幕横屏
@@ -44,7 +70,7 @@ class _FullscreenPlayerState extends State<FullscreenPlayer> {
       DeviceOrientation.landscapeLeft,
       DeviceOrientation.landscapeRight,
     ]);
-    Future.delayed(Duration(milliseconds: 3000), () {
+    Future.delayed(Duration(milliseconds: 1000), () {
       setState(() {
         bottomNavBarVisible = !bottomNavBarVisible;
       });
@@ -61,6 +87,7 @@ class _FullscreenPlayerState extends State<FullscreenPlayer> {
       DeviceOrientation.portraitUp,
     ]);
     _timer?.cancel();
+    _pageController.dispose();
   }
 
   void changeBottomPosition() {
@@ -84,42 +111,48 @@ class _FullscreenPlayerState extends State<FullscreenPlayer> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       body: GestureDetector(
         onTap: () => changeBottomPosition(),
-        child: Stack(
-          children: <Widget>[
-            _toggle
-                ? SliderComponent(
-                    widget.pageController,
-                    sliderList: widget.sliderList,
-                  )
-                : PPTVideoPlayer(videoController),
-            Positioned(
-              width: 160.0,
-              height: 90.0,
-              top: 10.0,
-              right: 10.0,
-              child: GestureDetector(
-                onTap: () => setState(() {
-                  _toggle = !_toggle;
-                }),
-                child: _toggle
-                    ? PPTVideoPlayer(videoController)
-                    : SliderComponent(
-                        widget.pageController,
-                        sliderList: widget.sliderList,
-                      ),
+        child: SizedBox(
+          width: MediaQuery.of(context).size.width,
+          child: Stack(
+            children: <Widget>[
+              _toggle
+                  ? SliderComponent(
+                      _pageController,
+                      sliderList: widget.sliderList,
+                    )
+                  : Center(
+                      child: PPTVideoPlayer(videoController),
+                    ),
+              Positioned(
+                width: 160.0,
+                height: 90.0,
+                top: 10.0,
+                right: 10.0,
+                child: GestureDetector(
+                  onTap: () => setState(() {
+                    _toggle = !_toggle;
+                  }),
+                  child: _toggle
+                      ? PPTVideoPlayer(videoController)
+                      : SliderComponent(
+                          _pageController,
+                          sliderList: widget.sliderList,
+                        ),
+                ),
               ),
-            ),
-            AnimatedPositioned(
-              bottom: bottomNavBarVisible ? 0.0 : -40.0,
-              left: 0.0,
-              right: 0.0,
-              child: ControllerBar(videoController),
-              duration: Duration(milliseconds: 400),
-              curve: Curves.easeOut,
-            ),
-          ],
+              AnimatedPositioned(
+                bottom: bottomNavBarVisible ? 0.0 : -40.0,
+                left: 0.0,
+                right: 0.0,
+                child: ControllerBar(videoController),
+                duration: Duration(milliseconds: 400),
+                curve: Curves.easeOut,
+              ),
+            ],
+          ),
         ),
       ),
     );

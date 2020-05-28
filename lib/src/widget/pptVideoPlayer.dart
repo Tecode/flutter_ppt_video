@@ -7,7 +7,7 @@ class PPTVideoPlayer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AspectRatio(
-      aspectRatio: 16 / 9,
+      aspectRatio: controller.value.aspectRatio,
       child: VideoPlayer(controller),
     );
   }
