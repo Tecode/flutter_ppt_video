@@ -33,7 +33,7 @@ class _MyAppState extends State<MyApp> {
     _videoController = VideoPlayerController.network(
         'https://video.pearvideo.com/mp4/third/20200520/cont-1675588-10735030-173120-hd.mp4');
     _videoController.addListener(() {
-      setState(() {});
+//      setState(() {});
     });
     _videoController.setLooping(true);
     _videoController.initialize().then((_) => setState(() {}));

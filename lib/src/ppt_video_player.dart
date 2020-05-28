@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
 import 'full_player.dart';
+import 'widget/SliderComponent.dart';
+import 'widget/pptVideoPlayer.dart';
 
 class PPtVideoPlayer extends StatefulWidget {
   final VideoPlayerController videoController;
@@ -28,11 +30,13 @@ class _PPtVideoPlayerState extends State<PPtVideoPlayer> {
 
   void _listenVideoControllerWrapper() {
     controller.addListener(() {
-      if (mounted)
-        setState(() {
-//          _addShowControllerListener();
-//          _autoPlay();
-        });
+//      print(
+//          '${(_pageController.page + 1) * 100}--${controller.value.position.inSeconds}---555');
+//      if (controller.value.position.inSeconds >
+//          (_pageController.page + 1) * 20) {
+//        _pageController.animateTo(_pageController.page + 1,
+//            duration: Duration(milliseconds: 400), curve: Curves.ease);
+//      }
     });
   }
 
@@ -56,35 +60,16 @@ class _PPtVideoPlayerState extends State<PPtVideoPlayer> {
     controller?.dispose();
   }
 
-  Widget get _buildPlayer {
-    return AspectRatio(
-      aspectRatio: 16 / 9,
-      child: VideoPlayer(controller),
-    );
-  }
-
-  Widget get _buildSlider {
-    return Container(
-      color: Colors.deepOrange,
-      child: PageView.builder(
-        controller: _pageController,
-        physics: ClampingScrollPhysics(),
-        itemBuilder: (BuildContext context, int index) =>
-            FadeInImage.assetNetwork(
-          placeholder: 'assets/loading.gif',
-          image: sliderList[index],
-        ),
-        itemCount: sliderList.length,
-      ),
-    );
-  }
-
   void pushFullScreenWidget() {
     final TransitionRoute<void> route = PageRouteBuilder<void>(
       settings: RouteSettings(name: '全屏播放'),
       pageBuilder: (BuildContext context, Animation<double> animation,
               Animation<double> secondaryAnimation) =>
-          FullscreenPlayer(controller: controller,),
+          FullscreenPlayer(
+        controller: controller,
+        pageController: _pageController,
+        sliderList: sliderList,
+      ),
     );
 
     route.completed.then((void value) {
@@ -108,17 +93,27 @@ class _PPtVideoPlayerState extends State<PPtVideoPlayer> {
         height: MediaQuery.of(context).size.width * (9 / 16),
         child: Stack(
           children: <Widget>[
-            _toggle ? _buildSlider : _buildPlayer,
+            _toggle
+                ? SliderComponent(
+                    _pageController,
+                    sliderList: sliderList,
+                  )
+                : PPTVideoPlayer(controller),
             Positioned(
-              width: 200.0,
-              height: 112.5,
+              width: 90.0,
+              height: 50.0,
               bottom: 10.0,
               right: 10.0,
               child: GestureDetector(
                 onTap: () => setState(() {
                   _toggle = !_toggle;
                 }),
-                child: _toggle ? _buildPlayer : _buildSlider,
+                child: _toggle
+                    ? PPTVideoPlayer(controller)
+                    : SliderComponent(
+                        _pageController,
+                        sliderList: sliderList,
+                      ),
               ),
             ),
             Positioned(

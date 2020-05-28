@@ -2,12 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="22a9ded0-0bdd-4ce4-9ce3-1fd725f0ad30" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/full_player.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/src/controller.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/src/widget/SliderComponent.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/src/widget/pptVideoPlayer.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/src/widget/timerText.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/ios/Runner.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/Runner.xcodeproj/project.pbxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/ios/Runner.xcworkspace/contents.xcworkspacedata" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/Runner.xcworkspace/contents.xcworkspacedata" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/example/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flutter_video.iml" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_video.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/full_player.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/full_player.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/src/ppt_video_player.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/ppt_video_player.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -15,7 +20,7 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="HL2001K3D85W05452" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="Pixel_2_API_26" />
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -70,7 +75,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
