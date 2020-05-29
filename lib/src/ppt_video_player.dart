@@ -142,12 +142,14 @@ class _PPtVideoPlayerState extends State<PPtVideoPlayer> {
             width: 90.0,
             height: 50.0,
           ),
-          onDragEnd: (dragEndDetails) => setState(() {
-            topOffset = dragEndDetails.offset.dy;
-            rightOffset = MediaQuery.of(context).size.width -
-                90.0 -
-                dragEndDetails.offset.dx;
-          }),
+          onDragEnd: (dragEndDetails) {
+//            setState(() {
+//            topOffset = dragEndDetails.offset.dy;
+//            rightOffset = MediaQuery.of(context).size.width -
+//                90.0 -
+//                dragEndDetails.offset.dx;
+//            })
+          },
         ),
       ),
     );

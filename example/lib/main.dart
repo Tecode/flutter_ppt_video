@@ -73,9 +73,19 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        body: PPtVideoPlayer(
-          videoController: _videoController,
-          sliderList: _pptList,
+        body: Column(
+          children: <Widget>[
+            Expanded(
+              child: SizedBox(),
+            ),
+            PPtVideoPlayer(
+              videoController: _videoController,
+              sliderList: _pptList,
+            ),
+            Expanded(
+              child: SizedBox(),
+            ),
+          ],
         ),
       ),
     );
