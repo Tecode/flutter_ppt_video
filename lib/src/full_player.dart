@@ -15,6 +15,12 @@ class FullscreenPlayer extends StatefulWidget {
   final VideoPlayerController controller;
   final StreamController streamController;
 
+  /// 是否显示底部的播放进度
+  final bool showProgressBar;
+
+  /// 倍数
+  final double playbackRate;
+
   /// ppt列表
   final List<PPTType> sliderList;
 
@@ -22,6 +28,8 @@ class FullscreenPlayer extends StatefulWidget {
     @required this.controller,
     this.sliderList = const <PPTType>[],
     this.streamController,
+    this.showProgressBar = true,
+    this.playbackRate = 1.0,
   }) : assert(controller != null);
 
   @override
@@ -30,6 +38,8 @@ class FullscreenPlayer extends StatefulWidget {
 
 class _FullscreenPlayerState extends State<FullscreenPlayer> {
   bool _toggle = false;
+
+  /// 视频播放控制器
   VideoPlayerController get videoController => widget.controller;
   bool bottomNavBarVisible = true;
   Timer _timer;
@@ -97,7 +107,7 @@ class _FullscreenPlayerState extends State<FullscreenPlayer> {
       return;
     }
     if (!bottomNavBarVisible) {
-      _timer = Timer(Duration(milliseconds: 5000), () {
+      _timer = Timer(Duration(milliseconds: 8000), () {
         setState(() {
           bottomNavBarVisible = !bottomNavBarVisible;
         });
@@ -167,7 +177,12 @@ class _FullscreenPlayerState extends State<FullscreenPlayer> {
                 bottom: bottomNavBarVisible ? 0.0 : -60.0,
                 left: 0.0,
                 right: 0.0,
-                child: ControllerBar(videoController),
+                child: ControllerBar(
+                  videoController,
+                  showProgressBar: widget.showProgressBar,
+                  streamController: widget.streamController,
+                  playbackRate: widget.playbackRate,
+                ),
                 duration: Duration(milliseconds: 400),
                 curve: Curves.easeOut,
               ),
