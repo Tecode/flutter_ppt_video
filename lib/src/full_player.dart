@@ -54,6 +54,32 @@ class _FullscreenPlayerState extends State<FullscreenPlayer> {
 
   PageController _pageController;
 
+  void _listening() {
+    if (!running) {
+      return;
+    }
+    running = false;
+    Future.delayed(Duration(milliseconds: 2000), () {
+      running = true;
+    });
+//      跳转到对应ppt索引
+    int _currentIndex =
+        getListPicture(videoController.value.position, widget.sliderList);
+    //        缓存下一张图片
+    cacheImage(
+      context,
+      index: _currentIndex,
+      listData: widget.sliderList,
+    );
+    if (_pageController.hasClients) {
+      _pageController.animateToPage(
+        _currentIndex,
+        duration: Duration(milliseconds: 400),
+        curve: Curves.ease,
+      );
+    }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -61,31 +87,7 @@ class _FullscreenPlayerState extends State<FullscreenPlayer> {
       initialPage:
           getListPicture(videoController.value.position, widget.sliderList),
     );
-    videoController.addListener(() {
-      if (!running) {
-        return;
-      }
-      running = false;
-      Future.delayed(Duration(milliseconds: 2000), () {
-        running = true;
-      });
-//      跳转到对应ppt索引
-      int _currentIndex =
-          getListPicture(videoController.value.position, widget.sliderList);
-      //        缓存下一张图片
-      cacheImage(
-        context,
-        index: _currentIndex,
-        listData: widget.sliderList,
-      );
-      if (_pageController.hasClients) {
-        _pageController.animateToPage(
-          _currentIndex,
-          duration: Duration(milliseconds: 400),
-          curve: Curves.ease,
-        );
-      }
-    });
+    videoController.addListener(_listening);
 //    隐藏状态栏
     SystemChrome.setEnabledSystemUIOverlays([]);
 //    屏幕横屏
@@ -103,6 +105,7 @@ class _FullscreenPlayerState extends State<FullscreenPlayer> {
   @override
   void dispose() {
     super.dispose();
+    videoController.removeListener(_listening);
 //    显示状态栏
     SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
 //    屏幕竖屏

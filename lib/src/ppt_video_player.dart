@@ -46,32 +46,33 @@ class _PPtVideoPlayerState extends State<PPtVideoPlayer> {
 
   List<PPTType> get sliderList => widget.sliderList;
 
-  void _listenVideoControllerWrapper() {
-    controller.addListener(() {
-      if (!running) {
-        return;
-      }
-      running = false;
-      Future.delayed(Duration(milliseconds: 1500), () {
-        running = true;
-      });
-      if (_pageController.hasClients) {
-        int _currentIndex =
-            getListPicture(controller.value.position, sliderList);
-//        缓存下一张图片
-        cacheImage(
-          context,
-          index: _currentIndex,
-          listData: sliderList,
-        );
-//      播放下一张ppt
-        _pageController.animateToPage(
-          _currentIndex,
-          duration: Duration(milliseconds: 400),
-          curve: Curves.ease,
-        );
-      }
+  void _listening() {
+    if (!running) {
+      return;
+    }
+    running = false;
+    Future.delayed(Duration(milliseconds: 1500), () {
+      running = true;
     });
+    if (_pageController.hasClients) {
+      int _currentIndex = getListPicture(controller.value.position, sliderList);
+//        缓存下一张图片
+      cacheImage(
+        context,
+        index: _currentIndex,
+        listData: sliderList,
+      );
+//      播放下一张ppt
+      _pageController.animateToPage(
+        _currentIndex,
+        duration: Duration(milliseconds: 400),
+        curve: Curves.ease,
+      );
+    }
+  }
+
+  void _listenVideoControllerWrapper() {
+    controller.addListener(_listening);
   }
 
   @override
@@ -87,6 +88,7 @@ class _PPtVideoPlayerState extends State<PPtVideoPlayer> {
   @override
   void dispose() {
     super.dispose();
+    controller.removeListener(_listening);
     controller?.dispose();
   }
 
@@ -108,12 +110,13 @@ class _PPtVideoPlayerState extends State<PPtVideoPlayer> {
     });
 
 //    controller.setVolume(1.0);
-    Navigator.of(context).push(route).then((_) {
-      if (mounted)
-        setState(() {
-          _listenVideoControllerWrapper();
-        });
-    });
+    Navigator.of(context).push(route);
+//    then((_) {
+//      if (mounted)
+//        setState(() {
+//          _listenVideoControllerWrapper();
+//        });
+//    });
   }
 
   Widget get _smallWindow {
