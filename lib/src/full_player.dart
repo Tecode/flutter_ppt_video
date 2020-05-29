@@ -42,7 +42,7 @@ class FullscreenPlayer extends StatefulWidget {
 }
 
 class _FullscreenPlayerState extends State<FullscreenPlayer> {
-  bool _toggle = false;
+  bool _toggle = true;
 
   /// 视频播放控制器
   VideoPlayerController get videoController => widget.controller;
@@ -83,6 +83,9 @@ class _FullscreenPlayerState extends State<FullscreenPlayer> {
   @override
   void initState() {
     super.initState();
+    if (widget.sliderList.isEmpty) {
+      _toggle = false;
+    }
     _pageController = PageController(
       initialPage:
           getListPicture(videoController.value.position, widget.sliderList),

@@ -32,7 +32,7 @@ class PPtVideoPlayer extends StatefulWidget {
 }
 
 class _PPtVideoPlayerState extends State<PPtVideoPlayer> {
-  bool _toggle = false;
+  bool _toggle = true;
   PageController _pageController;
   bool running = true;
 
@@ -77,6 +77,9 @@ class _PPtVideoPlayerState extends State<PPtVideoPlayer> {
 
   @override
   void initState() {
+    if (widget.sliderList.isEmpty) {
+      _toggle = false;
+    }
     super.initState();
     _streamController.stream.listen((event) {
       print(event['key']);
