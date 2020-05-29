@@ -146,17 +146,20 @@ class _ControllerBarState extends State<ControllerBar> {
                   Positioned(
                     top: -10.0,
                     left: 15.0,
-                    child: Container(
-                      child: Center(
-                          child: Text(
-                        'x$playbackRate',
-                        style: TextStyle(fontSize: 12.0, color: Colors.white),
-                      )),
-                      width: 34.0,
-                      height: 18.0,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20.0),
-                        color: Color(0xffED6831),
+                    child: Visibility(
+                      visible: playbackRate != 1.0,
+                      child: Container(
+                        child: Center(
+                            child: Text(
+                          'x$playbackRate',
+                          style: TextStyle(fontSize: 12.0, color: Colors.white),
+                        )),
+                        width: 34.0,
+                        height: 18.0,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20.0),
+                          color: Color(0xffED6831),
+                        ),
                       ),
                     ),
                   ),

@@ -24,12 +24,16 @@ class FullscreenPlayer extends StatefulWidget {
   /// ppt列表
   final List<PPTType> sliderList;
 
+  /// stack层组件
+  final Widget coverChild;
+
   FullscreenPlayer({
     @required this.controller,
     this.sliderList = const <PPTType>[],
     this.streamController,
     this.showProgressBar = true,
     this.playbackRate = 1.0,
+    this.coverChild = const SizedBox(),
   }) : assert(controller != null);
 
   @override
@@ -138,6 +142,11 @@ class _FullscreenPlayerState extends State<FullscreenPlayer> {
                   : Center(
                       child: PPTVideoPlayer(videoController),
                     ),
+              Positioned.fill(
+                top: 0.0,
+                left: 0.0,
+                child: widget.coverChild,
+              ),
               AnimatedPositioned(
                 width: 160.0,
                 height: 90.0,
@@ -156,15 +165,9 @@ class _FullscreenPlayerState extends State<FullscreenPlayer> {
                             sliderList: widget.sliderList,
                           ),
                     feedback: Container(
-                      color: Colors.blue,
+                      color: Colors.white.withOpacity(0.6),
                       width: 160.0,
                       height: 90.0,
-                      child: _toggle
-                          ? PPTVideoPlayer(videoController)
-                          : SliderComponent(
-                              _pageController,
-                              sliderList: widget.sliderList,
-                            ),
                     ),
                     onDragEnd: (dragEndDetails) => setState(() {
                       topOffset = dragEndDetails.offset.dy;

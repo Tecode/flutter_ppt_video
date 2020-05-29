@@ -15,11 +15,15 @@ class PPtVideoPlayer extends StatefulWidget {
   final List<PPTType> sliderList;
   final bool controllerVisible;
 
+  /// stack层组件
+  final Widget coverChild;
+
   PPtVideoPlayer({
     @required this.videoController,
     this.startAt = const Duration(seconds: 0),
     this.sliderList = const <PPTType>[],
     this.controllerVisible = true,
+    this.coverChild = const SizedBox(),
   }) : assert(videoController != null);
 
   @override
@@ -113,6 +117,11 @@ class _PPtVideoPlayerState extends State<PPtVideoPlayer> {
                     sliderList: sliderList,
                   )
                 : PPTVideoPlayer(controller),
+            Positioned.fill(
+              top: 0.0,
+              left: 0.0,
+              child: widget.coverChild,
+            ),
             Positioned(
               width: 90.0,
               height: 50.0,
