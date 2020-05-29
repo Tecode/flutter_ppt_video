@@ -20,10 +20,8 @@ class SliderComponent extends StatelessWidget {
           controller: pageController,
           key: PageStorageKey('slider'),
           physics: NeverScrollableScrollPhysics(),
-          itemBuilder: (BuildContext context, int index) =>
-              FadeInImage.assetNetwork(
-            placeholder: 'packages/flutter_video/assets/loading.gif',
-            image: sliderList[index].url,
+          itemBuilder: (BuildContext context, int index) => Image.network(
+            sliderList[index].url,
             fit: BoxFit.cover,
           ),
           itemCount: sliderList.length,

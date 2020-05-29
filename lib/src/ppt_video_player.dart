@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_video/src/type.dart';
 import 'package:video_player/video_player.dart';
 
+import 'cacheImage.dart';
 import 'calculatePicturePosition.dart';
 import 'full_player.dart';
 import 'widget/SliderComponent.dart';
@@ -55,8 +56,17 @@ class _PPtVideoPlayerState extends State<PPtVideoPlayer> {
         running = true;
       });
       if (_pageController.hasClients) {
+        int _currentIndex =
+            getListPicture(controller.value.position, sliderList);
+//        缓存下一张图片
+        cacheImage(
+          context,
+          index: _currentIndex,
+          listData: sliderList,
+        );
+//      播放下一张ppt
         _pageController.animateToPage(
-          getListPicture(controller.value.position, sliderList),
+          _currentIndex,
           duration: Duration(milliseconds: 400),
           curve: Curves.ease,
         );

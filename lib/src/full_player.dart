@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_video/src/controller.dart';
 import 'package:video_player/video_player.dart';
 
+import 'cacheImage.dart';
 import 'calculatePicturePosition.dart';
 import 'type.dart';
 import 'widget/SliderComponent.dart';
@@ -69,11 +70,17 @@ class _FullscreenPlayerState extends State<FullscreenPlayer> {
         running = true;
       });
 //      跳转到对应ppt索引
-      int _index =
+      int _currentIndex =
           getListPicture(videoController.value.position, widget.sliderList);
+      //        缓存下一张图片
+      cacheImage(
+        context,
+        index: _currentIndex,
+        listData: widget.sliderList,
+      );
       if (_pageController.hasClients) {
         _pageController.animateToPage(
-          _index,
+          _currentIndex,
           duration: Duration(milliseconds: 400),
           curve: Curves.ease,
         );
