@@ -49,7 +49,7 @@ class _FullscreenPlayerState extends State<FullscreenPlayer> {
   Timer _timer;
   bool running = true;
   double topOffset = 10.0;
-  double leftOffset = 10.0;
+  double rightOffset = 10.0;
 
   PageController _pageController;
 
@@ -124,6 +124,43 @@ class _FullscreenPlayerState extends State<FullscreenPlayer> {
     });
   }
 
+  Widget get _smallWindow {
+    if (widget.sliderList.isEmpty) {
+      return SizedBox();
+    }
+    return AnimatedPositioned(
+      width: 160.0,
+      height: 90.0,
+      top: topOffset,
+      right: rightOffset,
+      duration: Duration(milliseconds: 200),
+      child: GestureDetector(
+        onTap: () => setState(() {
+          _toggle = !_toggle;
+        }),
+        child: Draggable(
+          child: _toggle
+              ? PPTVideoPlayer(videoController)
+              : SliderComponent(
+                  _pageController,
+                  sliderList: widget.sliderList,
+                ),
+          feedback: Container(
+            color: Colors.white.withOpacity(0.6),
+            width: 160.0,
+            height: 90.0,
+          ),
+          onDragEnd: (dragEndDetails) => setState(() {
+            topOffset = dragEndDetails.offset.dy;
+            rightOffset = MediaQuery.of(context).size.width -
+                160.0 -
+                dragEndDetails.offset.dx;
+          }),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -139,43 +176,13 @@ class _FullscreenPlayerState extends State<FullscreenPlayer> {
                       _pageController,
                       sliderList: widget.sliderList,
                     )
-                  : Center(
-                      child: PPTVideoPlayer(videoController),
-                    ),
+                  : Center(child: PPTVideoPlayer(videoController)),
               Positioned.fill(
                 top: 0.0,
                 left: 0.0,
                 child: widget.coverChild,
               ),
-              AnimatedPositioned(
-                width: 160.0,
-                height: 90.0,
-                top: topOffset,
-                left: leftOffset,
-                duration: Duration(milliseconds: 200),
-                child: GestureDetector(
-                  onTap: () => setState(() {
-                    _toggle = !_toggle;
-                  }),
-                  child: Draggable(
-                    child: _toggle
-                        ? PPTVideoPlayer(videoController)
-                        : SliderComponent(
-                            _pageController,
-                            sliderList: widget.sliderList,
-                          ),
-                    feedback: Container(
-                      color: Colors.white.withOpacity(0.6),
-                      width: 160.0,
-                      height: 90.0,
-                    ),
-                    onDragEnd: (dragEndDetails) => setState(() {
-                      topOffset = dragEndDetails.offset.dy;
-                      leftOffset = dragEndDetails.offset.dx;
-                    }),
-                  ),
-                ),
-              ),
+              _smallWindow,
               AnimatedPositioned(
                 bottom: bottomNavBarVisible ? 0.0 : -60.0,
                 left: 0.0,

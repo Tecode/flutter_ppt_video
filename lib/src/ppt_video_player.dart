@@ -35,6 +35,9 @@ class _PPtVideoPlayerState extends State<PPtVideoPlayer> {
   PageController _pageController;
   bool running = true;
 
+  double topOffset = 10.0;
+  double rightOffset = 10.0;
+
 ////  监听ppt播放跳转倍速
   StreamController _streamController = StreamController.broadcast();
 
@@ -103,6 +106,43 @@ class _PPtVideoPlayerState extends State<PPtVideoPlayer> {
     });
   }
 
+  Widget get _smallWindow {
+    if (sliderList.isEmpty) {
+      return SizedBox();
+    }
+    return AnimatedPositioned(
+      width: 90.0,
+      height: 50.0,
+      top: topOffset,
+      right: rightOffset,
+      duration: Duration(milliseconds: 400),
+      child: GestureDetector(
+        onTap: () => setState(() {
+          _toggle = !_toggle;
+        }),
+        child: Draggable(
+          child: _toggle
+              ? PPTVideoPlayer(controller)
+              : SliderComponent(
+                  _pageController,
+                  sliderList: sliderList,
+                ),
+          feedback: Container(
+            color: Colors.white.withOpacity(0.6),
+            width: 90.0,
+            height: 50.0,
+          ),
+          onDragEnd: (dragEndDetails) => setState(() {
+            topOffset = dragEndDetails.offset.dy;
+            rightOffset = MediaQuery.of(context).size.width -
+                90.0 -
+                dragEndDetails.offset.dx;
+          }),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -122,23 +162,7 @@ class _PPtVideoPlayerState extends State<PPtVideoPlayer> {
               left: 0.0,
               child: widget.coverChild,
             ),
-            Positioned(
-              width: 90.0,
-              height: 50.0,
-              bottom: 10.0,
-              right: 10.0,
-              child: GestureDetector(
-                onTap: () => setState(() {
-                  _toggle = !_toggle;
-                }),
-                child: _toggle
-                    ? PPTVideoPlayer(controller)
-                    : SliderComponent(
-                        _pageController,
-                        sliderList: sliderList,
-                      ),
-              ),
-            ),
+            _smallWindow,
             Positioned(
               bottom: -6.0,
               left: 0,

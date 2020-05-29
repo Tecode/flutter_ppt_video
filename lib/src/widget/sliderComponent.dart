@@ -13,7 +13,7 @@ class SliderComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.transparent,
+      color: Colors.white.withOpacity(0.6),
       child: ScrollConfiguration(
         behavior: CustomBehavior(),
         child: PageView.builder(
