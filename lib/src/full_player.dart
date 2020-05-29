@@ -8,7 +8,7 @@ import 'package:video_player/video_player.dart';
 import 'cacheImage.dart';
 import 'calculatePicturePosition.dart';
 import 'type.dart';
-import 'widget/SliderComponent.dart';
+import 'widget/sliderComponent.dart';
 import 'widget/pptVideoPlayer.dart';
 
 class FullscreenPlayer extends StatefulWidget {

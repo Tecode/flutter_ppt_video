@@ -7,7 +7,7 @@ import 'package:video_player/video_player.dart';
 import 'cacheImage.dart';
 import 'calculatePicturePosition.dart';
 import 'full_player.dart';
-import 'widget/SliderComponent.dart';
+import 'widget/sliderComponent.dart';
 import 'widget/pptVideoPlayer.dart';
 
 class PPtVideoPlayer extends StatefulWidget {
