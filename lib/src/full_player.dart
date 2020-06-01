@@ -55,6 +55,18 @@ class _FullscreenPlayerState extends State<FullscreenPlayer> {
   PageController _pageController;
 
   void _listening() {
+    if (videoController != null &&
+        videoController.value.duration != null &&
+        (videoController.value.position.inSeconds + 1) >=
+            videoController.value.duration.inSeconds) {
+      widget.streamController.add({'key': 'EXIT_FULL_SCREEN', 'value': true});
+      // 播放完毕
+      SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
+      //  屏幕竖屏
+      SystemChrome.setPreferredOrientations([
+        DeviceOrientation.portraitUp,
+      ]);
+    }
     if (!running) {
       return;
     }

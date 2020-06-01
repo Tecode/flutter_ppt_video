@@ -80,7 +80,7 @@ class _MyAppState extends State<MyApp> {
             ),
             PPtVideoPlayer(
               videoController: _videoController,
-              sliderList: _pptList,
+              sliderList: [],
             ),
             Expanded(
               child: SizedBox(),

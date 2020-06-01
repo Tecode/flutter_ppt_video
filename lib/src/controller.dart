@@ -195,7 +195,10 @@ class _ControllerBarState extends State<ControllerBar> {
       children: [
         GestureDetector(
           behavior: HitTestBehavior.opaque,
-          onTap: () => Navigator.of(context).pop(),
+          onTap: () {
+            streamController.add({'key': 'EXIT_FULL_SCREEN', 'value': true});
+            Navigator.of(context).pop();
+          },
           child: SizedBox(
             height: 34.0,
             child: Row(

@@ -9,6 +9,7 @@ void cacheImage(
   int index,
   List<PPTType> listData,
 }) {
+  if (listData.isEmpty) return;
   int currentIndex = 0;
   () {
     currentIndex = min(index + 1, listData.length - 1);
