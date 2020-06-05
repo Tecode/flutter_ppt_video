@@ -61,11 +61,11 @@ class _FullscreenPlayerState extends State<FullscreenPlayer> {
             videoController.value.duration.inSeconds) {
       widget.streamController.add({'key': 'EXIT_FULL_SCREEN', 'value': true});
       // 播放完毕
-      SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
-      //  屏幕竖屏
-      SystemChrome.setPreferredOrientations([
-        DeviceOrientation.portraitUp,
-      ]);
+//      SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
+//      //  屏幕竖屏
+//      SystemChrome.setPreferredOrientations([
+//        DeviceOrientation.portraitUp,
+//      ]);
     }
     if (!running) {
       return;
