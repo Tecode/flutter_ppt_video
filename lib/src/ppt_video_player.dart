@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_video/src/VideoLoading.dart';
 import 'package:flutter_video/src/type.dart';
 import 'package:video_player/video_player.dart';
 
@@ -179,6 +180,11 @@ class _PPtVideoPlayerState extends State<PPtVideoPlayer> {
               top: 0.0,
               left: 0.0,
               child: widget.coverChild,
+            ),
+            Positioned.fill(
+              top: 0.0,
+              left: 0.0,
+              child: VideoLoading(controller),
             ),
             _smallWindow,
             Positioned(

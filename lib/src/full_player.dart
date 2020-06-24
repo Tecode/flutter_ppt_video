@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_video/src/VideoLoading.dart';
 import 'package:flutter_video/src/controller.dart';
 import 'package:video_player/video_player.dart';
 
@@ -206,6 +207,11 @@ class _FullscreenPlayerState extends State<FullscreenPlayer> {
                 top: 0.0,
                 left: 0.0,
                 child: widget.coverChild,
+              ),
+              Positioned.fill(
+                top: 0.0,
+                left: 0.0,
+                child: VideoLoading(videoController),
               ),
               _smallWindow,
               AnimatedPositioned(
