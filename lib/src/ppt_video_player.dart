@@ -93,7 +93,7 @@ class _PPtVideoPlayerState extends State<PPtVideoPlayer> {
   void dispose() {
     super.dispose();
     controller.removeListener(_listening);
-    controller?.dispose();
+//    controller?.dispose();
   }
 
   void pushFullScreenWidget() {
